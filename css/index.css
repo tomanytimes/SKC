@@ -1,7 +1,18 @@
+@import url("./web/static/pretendard.css");
+@import url("./web/variable/pretendardvariable.css");
+
 html,
 body {
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+}
+
+/* span {
+  font-family: "Pretendard Variable";
+} */
+
+i {
+  font-style: unset;
 }
 
 body {
@@ -14,8 +25,133 @@ body {
 .background-image {
   width: 100%;
   position: absolute;
+  z-index: -1;
   height: 570px;
   bottom: 0;
+}
+
+.content-box {
+  padding: 5rem 2.5rem 0 2.5rem;
+}
+
+.vote-box {
+  padding: 2rem 2.5rem 0 2.5rem;
+}
+
+.vote-wrap {
+  padding: 2em 0;
+}
+.vote-wrap .vote {
+}
+
+.vote-wrap .vote + .vote {
+  margin-top: 2em;
+}
+
+.vote-wrap .vote .slider-wrap {
+  padding-top: 1em;
+}
+
+.vote-wrap .vote .score-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 21px;
+  line-height: 20px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.vote-wrap .vote .score-wrap .score-box {
+  font-size: 36px;
+  line-height: 30px;
+  color: #ffffff;
+}
+
+.vote-wrap .vote .score-wrap .score-box i {
+  padding: 0 0.725rem;
+}
+
+.login-wrap {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4.725rem;
+  font-size: 20px;
+  line-height: 26px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.login-wrap .input-wrap {
+  padding-top: 2rem;
+}
+
+.login-wrap .input-wrap input::placeholder {
+  opacity: 0.502;
+  font-size: 24px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+.login-wrap .input-wrap input {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #ffff00;
+  font-size: 24px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+  height: 40px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  font-size: 30px;
+  line-height: 38px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.title .back-btn {
+  display: flex;
+  font-size: 20px;
+  padding-bottom: 1em;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.title .back-btn span {
+  margin-left: 0.725em;
+}
+
+.title .back-btn span .article_num {
+  font-style: unset;
+}
+
+.title .title-txt {
+  display: flex;
+  flex-direction: column;
+  margin: 0.825rem 0;
+}
+
+.title .title-txt .lg {
+  font-size: 36px;
+  line-height: 50px;
+}
+
+.title .sub-title {
+  padding-top: 1em;
+  font-size: 20px;
+  line-height: 25px;
+  color: #4d4d4d;
+  font-family: "Pretendard Variable";
 }
 
 .btn-wrap {
@@ -29,17 +165,269 @@ body {
 }
 
 .btn-wrap .cup {
-  margin-left: 1.5em;
+  width: 180px;
+  height: 190px;
 }
 
 .btn-wrap .login-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
   width: 246px;
   height: 60px;
+  border: none;
   border-radius: 30px;
   background-color: #ffffff;
   font-size: 21px;
   line-height: 24px;
   color: #f15a24;
-  font-family: "Pretendard  Variable";
+  font-family: "Pretendard Variable";
   text-align: center;
+  box-shadow: 5px 5px 5px #700000;
+}
+
+.submit-wrap {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+  text-align: center;
+}
+
+.submit-wrap .submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: #ffffff;
+  font-size: 18px;
+  line-height: 30px;
+  color: #f15a24;
+  margin: 1.5em 0;
+  box-shadow: 5px 5px 5px #700000;
+}
+
+.text-side1 {
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.submit-wrap .submit-btn.disabled {
+  opacity: 0.502;
+}
+
+.modal-dialog.modal-dialog-centered {
+  justify-content: center;
+}
+
+.modal-content {
+  width: 85% !important;
+  border-radius: 30px !important;
+}
+
+.modal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-inner .inner-title {
+  padding-top: 0.5em;
+  font-size: 21px;
+  line-height: 24px;
+  color: #000000;
+  font-family: "Pretendard Variable";
+  text-align: center;
+}
+
+.modal-inner .inner-content {
+  padding: 1em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-inner .inner-bottom {
+  width: 100%;
+  padding-top: 1em;
+}
+
+.modal-inner .inner-bottom button {
+  width: 100%;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #f15a24;
+  border: none;
+  font-size: 21px;
+  line-height: 24px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.modal-inner .outer-bottom {
+  position: absolute;
+  bottom: -3.25rem;
+  width: 100%;
+  padding-top: 1em;
+}
+
+.modal-inner .outer-bottom button {
+  width: 100%;
+  height: 60px;
+  border-radius: 30px;
+  background: none;
+  border: none;
+  font-size: 21px;
+  line-height: 24px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.article-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 2em 0;
+}
+
+.article-wrap .article {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  height: 80px;
+  border-radius: 40px;
+  border: 2px solid #ffffff;
+  padding: 0em 1.5em;
+  color: #ffffff;
+}
+
+.article-wrap .article + .article {
+  margin-top: 1.2em;
+}
+
+.article-wrap .article .article-title {
+  justify-self: flex-start;
+  font-size: 21px;
+  line-height: 30px;
+  font-family: "Pretendard Variable";
+}
+
+.article-wrap .article .article-score {
+  margin-left: auto;
+  font-size: 15px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+  text-align: right;
+}
+
+.article-wrap .article .article-score .score {
+  font-size: 26px;
+}
+
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 8em;
+}
+
+.logo-wrap img {
+  width: 60px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 100%;
+  height: 7px;
+  background: #ffea55;
+  border-radius: 5px;
+  background-image: linear-gradient(#fff, #fff);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Input Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+.convey-wrap {
+  font-size: 21px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.convey-wrap .textarea-wrap {
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
+
+.convey-wrap .textarea-wrap textarea {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  outline: none;
+  height: 160px;
+  color: #ffffff;
+  background: none;
+  border: 2px solid #ffffff;
+  resize: none;
+}
+
+.convey-wrap .textarea-wrap textarea::placeholder {
+  color: #fff;
+}
+
+.result-wrap {
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  font-family: "Pretendard Variable";
+}
+
+.result-wrap .thank {
+  padding: 1em 0;
 }

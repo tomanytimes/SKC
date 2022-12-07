@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>SKC</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <img class="background-image" src="./resource/backimage.png" />
+    <div class="content-box">
+      <div class="title">
+        <img src="./resource/skcLogo.png" />
+        <div class="title-txt">
+          <span class="lg">SV Challengers</span>
+          <span>5기 최종보고회</span>
+        </div>
+        <div class="sub-title">
+          <span
+            >조별 항목을 클릭하여 평가를<br />
+            진행해 주세요.</span
+          >
+        </div>
+      </div>
+      <div class="article-wrap">
+        <div class="article" data-articleId="1">
+          <div class="article-title">
+            <span>1번째 발표 조</span>
+          </div>
+          <div class="article-score">
+            <span>평균</span>
+            <span class="score">0.0</span>
+          </div>
+        </div>
+        <div class="article" data-articleId="2">
+          <div class="article-title">
+            <span>2번째 발표 조</span>
+          </div>
+          <div class="article-score">
+            <span>평균</span>
+            <span class="score">0.0</span>
+          </div>
+        </div>
+        <div class="article" data-articleId="3">
+          <div class="article-title">
+            <span>3번째 발표 조</span>
+          </div>
+          <div class="article-score">
+            <span>평균</span>
+            <span class="score">0.0</span>
+          </div>
+        </div>
+        <div class="article" data-articleId="4">
+          <div class="article-title">
+            <span>4번째 발표 조</span>
+          </div>
+          <div class="article-score">
+            <span>평균</span>
+            <span class="score">0.0</span>
+          </div>
+        </div>
+        <div class="article" data-articleId="5">
+          <div class="article-title">
+            <span>5번째 발표 조</span>
+          </div>
+          <div class="article-score">
+            <span>평균</span>
+            <span class="score">0.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="submit-wrap">
+        <div>
+          <span class="text-side1">모든 조를 평가 후 결과를 제출해주세요.</span>
+        </div>
+        <a class="submit-btn disabled">결과 제출</a>
+      </div>
+      <div class="logo-wrap">
+        <img src="./resource/skcLogo.svg" />
+      </div>
+    </div>
+  </body>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-inner">
+            <div class="inner-title">
+              <span>점수를 제출하시겠어요?</span>
+            </div>
+            <div class="inner-content">
+              <span>제출하신 후에는</span>
+              <span>제출하신 내용을 번복할수 없어요.</span>
+            </div>
+            <div class="inner-bottom">
+              <button type="button" id="voteSend_btn" data-bs-dismiss="modal">네. 제출할게요.</button>
+            </div>
+            <div class="outer-bottom">
+              <button type="button" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let articles = document.querySelectorAll(".article");
+    let submitBtn = document.querySelector(".submit-btn");
+    let voteSend = document.getElementById("voteSend_btn");
+
+    let myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {
+      keyboard: false,
+    });
+
+    voteSend.addEventListener("click", function (e) {
+      let params = {};
+
+      // axios.defaults.withCredentials = true;
+
+      // axios
+      //   .post("https://api.campung.com/skchallengers/v1/users/me/scores/temp", params, {
+      //     withCredentials: true, // 쿠키 cors 통신 설정
+      //   })
+      //   .then((response) => {
+      //     console.log(response);
+      //   });
+
+      location.href = "./result.html";
+    });
+
+    submitBtn.addEventListener("click", function (e) {
+      myModal.show();
+    });
+    window.addEventListener("pageshow", (event) => {
+      articles.forEach((article) => {
+        let articleid = article.dataset.articleid;
+        let prevData = JSON.parse(sessionStorage.getItem(articleid));
+        let sum = 0;
+        let cnt = 0;
+
+        if (prevData) {
+          for (value in prevData) {
+            let data = prevData[value];
+
+            if (data.id != "textareaElem") {
+              let sliderData = Math.round(data.value);
+              sum += sliderData;
+              cnt++;
+            }
+          }
+
+          article.querySelector(".score").innerHTML = (sum / cnt).toFixed(1);
+        }
+      });
+
+      if ([...document.querySelectorAll(".score")].filter((x) => parseInt(x.innerHTML) == 0).length <= 0) {
+        submitBtn.classList.remove("disabled");
+      } else {
+        submitBtn.classList.add("disabled");
+      }
+
+      // let prevData = JSON.parse(sessionStorage.getItem(params.get("articleId")));
+
+      // for (value in prevData) {
+      //   let prev = prevData[value];
+      //   let prevElem = document.getElementById(prev.id);
+
+      //   let val = prev.value;
+
+      //   if (prevElem.type == "range") {
+      //     const min = prevElem.min;
+      //     const max = prevElem.max;
+      //     let sliderScore = prevElem.closest(".vote").querySelector(".score");
+
+      //     prevElem.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+      //     sliderScore.innerHTML = Math.round(val);
+      //   }
+
+      //   prevElem.value = prev.value;
+      // }
+      // submitBtn.classList.remove("disabled");
+    });
+
+    articles.forEach((x) => {
+      x.addEventListener("click", function (e) {
+        let article = e.target.closest(".article");
+        let articleId = article.dataset.articleid;
+
+        location.href = "./vote.html?articleId=" + articleId;
+      });
+    });
+  </script>
+</html>

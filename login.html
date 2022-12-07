@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>SKC</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <img class="background-image" src="./resource/backimage.png" />
+    <div class="content-box">
+      <div class="title">
+        <img src="./resource/skcLogo.png" />
+        <div class="title-txt">
+          <span class="lg">SV Challengers</span>
+          <span>5기 최종보고회</span>
+        </div>
+      </div>
+      <div class="login-wrap">
+        <span>어서오세요.</span>
+        <span>심사위원의 성함을 입력해 주세요.</span>
+        <div class="input-wrap">
+          <input id="loginBtn" placeholder="성함을 입력해 주세요." />
+        </div>
+      </div>
+    </div>
+    <div class="btn-wrap">
+      <!-- Button trigger modal -->
+      <button type="button" class="login-btn" >심사위원 로그인</button>
+  </body>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-inner">
+            <div class="inner-title">
+              <span>성함을 입력해 주세요.</span>
+            </div>
+            <div class="inner-content">
+              <span>성함을 입력해주셔야</span>
+              <span>점수 입력이 가능해요!</span>
+            </div>
+            <div class="inner-bottom">
+              <button type="button" data-bs-dismiss="modal">확인</button>
+            </div>
+            <div class="outer-bottom">
+              <button type="button" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let button = document.querySelector(".login-btn");
+    let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+      keyboard: false
+    });
+    let nameEl = document.querySelector("#loginBtn");
+
+    button.addEventListener("click" , function(e) {
+      
+      if((nameEl.value).length > 0) {
+        location.href = "./selector.html";
+        
+      } else {
+        myModal.show();
+      }
+    })
+  </script>
+</div>
+</html>

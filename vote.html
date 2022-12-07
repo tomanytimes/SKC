@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>SKC</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/slider.css" />
+    <script src="./js/rangeSlider.js"></script>
+  </head>
+  <body>
+    <img class="background-image" src="./resource/backimage.png" />
+    <div class="vote-box">
+      <div class="title">
+        <div class="back-btn">
+          <img src="./resource/빼기 1.svg" />
+          <span><i class="article_num">0</i>번째 발표 조</span>
+        </div>
+        <img src="./resource/skcLogo.png" />
+        <div class="title-txt">
+          <span class="lg">SV Challengers</span>
+          <span>5기 최종보고회</span>
+        </div>
+        <div class="sub-title">
+          <span>휜색 원을 드래그하여 각 조별로 <br />평가 항목별로 점수(10점 <br />만점)를 입력해주세요</span>
+        </div>
+      </div>
+      <div class="vote-wrap">
+        <div class="vote">
+          <div class="score-wrap">
+            <span>SV/ESG 연관성</span>
+            <span class="score-box"><i class="score">0</i>점</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="vote1" class="slider" min="0" max="10" step="0.1" value="0" />
+          </div>
+        </div>
+        <div class="vote">
+          <div class="score-wrap">
+            <span>SV/ESG 창출 효과</span>
+            <span class="score-box"><i class="score">0</i>점</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="vote2" class="slider" min="0" max="10" step="0.1" value="0" />
+          </div>
+        </div>
+        <div class="vote">
+          <div class="score-wrap">
+            <span>아이디어 독창성</span>
+            <span class="score-box"><i class="score">0</i>점</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="vote3" class="slider" min="0" max="10" step="0.1" value="0" />
+          </div>
+        </div>
+        <div class="vote">
+          <div class="score-wrap">
+            <span>과제 완결성</span>
+            <span class="score-box"><i class="score">0</i>점</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="vote4" class="slider" min="0" max="10" step="0.1" value="0" />
+          </div>
+        </div>
+        <div class="vote">
+          <div class="score-wrap">
+            <span>VWBE</span>
+            <span class="score-box"><i class="score">0</i>점</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="vote5" class="slider" min="0" max="10" step="0.1" value="0" />
+          </div>
+        </div>
+      </div>
+      <div class="convey-wrap">
+        <div>
+          <span>종합의견</span>
+        </div>
+        <div class="textarea-wrap">
+          <textarea id="textareaElem" placeholder="전하고 싶은 한마디를 적어주세요."></textarea>
+        </div>
+      </div>
+      <div class="submit-wrap">
+        <div>
+          <span>모든 점수를 입력 후 저장해 주세요</span>
+        </div>
+        <a id="submitBtn" class="submit-btn disabled">저장</a>
+      </div>
+      <div class="logo-wrap">
+        <img src="./resource/skcLogo.svg" />
+      </div>
+    </div>
+  </body>
+  <script>
+    const rangeInputs = document.querySelectorAll('input[type="range"]');
+    const submitBtn = document.querySelector("#submitBtn");
+    const params = new URLSearchParams(window.location.search);
+    const articleIdElem = document.querySelectorAll(".article_num");
+    let sliders = document.querySelectorAll(".slider");
+
+    window.addEventListener("pageshow", (event) => {
+      let prevData = JSON.parse(sessionStorage.getItem(params.get("articleId")));
+
+      if (!prevData) {
+        sliders.forEach((y) => {
+          y.value = 0;
+        });
+      } else {
+        for (value in prevData) {
+          let prev = prevData[value];
+          let prevElem = document.getElementById(prev.id);
+
+          let val = prev.value;
+
+          if (prevElem.type == "range") {
+            const min = prevElem.min;
+            const max = prevElem.max;
+            let sliderScore = prevElem.closest(".vote").querySelector(".score");
+
+            prevElem.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+            sliderScore.innerHTML = Math.round(val);
+          }
+
+          prevElem.value = prev.value;
+        }
+        submitBtn.classList.remove("disabled");
+      }
+    });
+
+    articleIdElem.forEach((y) => {
+      y.innerHTML = params.get("articleId");
+    });
+
+    function handleInputChange(e) {
+      let target = e.target;
+      let sliderScore = target.closest(".vote").querySelector(".score");
+      if (e.target.type !== "range") {
+        target = document.getElementById("range");
+      }
+      const min = target.min;
+      const max = target.max;
+      const val = target.value;
+      const value = Math.round(val);
+
+      target.style.backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
+
+      sliderScore.innerHTML = value;
+
+      if ([...document.querySelectorAll(".score")].filter((x) => parseInt(x.innerHTML) == 0).length <= 0) {
+        submitBtn.classList.remove("disabled");
+      }
+    }
+    document.querySelector(".back-btn img").addEventListener("click", function (e) {
+      location.href = "./selector.html";
+    });
+
+    rangeInputs.forEach((input) => {
+      input.addEventListener("input", handleInputChange);
+    });
+
+    submitBtn.addEventListener("click", function (e) {
+      if (submitBtn.classList.contains("disalbed")) return;
+
+      let textarea = document.querySelector("#textareaElem");
+      let sliderArr = [...sliders];
+
+      sliderArr.push({ id: textarea.id, value: textarea.value });
+      sessionStorage.setItem(
+        params.get("articleId"),
+        JSON.stringify(
+          Object.assign(
+            {},
+            sliderArr.map((slider) => {
+              return { id: slider.id, value: slider.value };
+            })
+          )
+        )
+      );
+
+      location.href = "./selector.html";
+    });
+  </script>
+</html>
